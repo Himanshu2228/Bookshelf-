@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Proxy Cups 🍫</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ========== THEME ========== */
+:root {
+  --bg: #0e0705;
+  --card: #1b0f0b;
+  --choco-dark: #2b1208;
+  --choco-mid: #4a1f12;
+  --choco-light: #6b2f1a;
+  --cream: #f5e6d3;
+  --valentine: #7a1f2b;
+  --gold: #c89b63;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a0d0a, var(--bg));
+  font-family: "Poppins", system-ui, sans-serif;
+  color: var(--cream);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ========== CHOCOLATE DRIPS (GLOBAL) ========== */
+.drip {
+  position: fixed;
+  top: -120px;
+  width: 32px;
+  height: 260px;
+  background: linear-gradient(
+    to bottom,
+    var(--choco-dark),
+    var(--choco-mid),
+    var(--choco-light),
+    var(--choco-dark)
+  );
+  border-radius: 18px;
+  filter: blur(0.4px);
+  animation: fall 8s linear infinite;
+  opacity: 0.85;
+}
+
+.drip::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 26px;
+  background: var(--choco-mid);
+  border-radius: 50%;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px) scaleX(0.9); }
+  100% { transform: translateY(110vh) scaleX(1.1); }
+}
+
+/* multiple drips */
+.drip:nth-child(1){ left: 10%; animation-delay: 0s; }
+.drip:nth-child(2){ left: 38%; animation-delay: 2.3s; }
+.drip:nth-child(3){ left: 68%; animation-delay: 4.7s; }
+
+/* ========== MAIN WRAPPER ========== */
+.container {
+    
+  position: relative;
+  z-index: 10;
+  width: 92%;
+  max-width: 420px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.tagline {
+  opacity: 0.85;
+  margin-bottom: 1.8rem;
+}
+
+/* ========== BUTTONS ========== */
+button {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, var(--choco-mid), var(--valentine));
+  color: var(--cream);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover { transform: scale(1.03); }
+
+/* ========== ROULETTE BOX ========== */
+.roulette {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #1e100c, #140a07);
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  min-height: 64px;
+}
+
+/* ========== RESULT CARD ========== */
+.card {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.8rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: var(--card);
+  display: none;
+}
+
+/* ========== MENU BOX ========== */
+.menu-box {
+  display: none;
+  margin-top: 1.6rem;
+  padding: 1.4rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #1e100c, #140a07);
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+  text-align: left;
+}
+
+.menu-box h3 {
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.menu-box p {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* syrup sliding ON card */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  width: 30px;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    var(--choco-dark),
+    var(--choco-mid),
+    var(--choco-light),
+    var(--choco-dark)
+  );
+  border-radius: 18px;
+  opacity: 0.65;
+  filter: blur(0.4px);
+  animation: slide 6s cubic-bezier(0.4,0,0.2,1) infinite;
+}
+
+.card::before { left: 25%; }
+.card::after  { left: 65%; animation-delay: 1.5s; }
+
+@keyframes slide {
+  0% { transform: translateY(-100%) scaleX(0.9); }
+  50% { transform: translateY(20%) scaleX(1.1); }
+  100% { transform: translateY(100%) scaleX(1); }
+}
+
+.card * { position: relative; z-index: 2; }
+
+.card h2 {
+  margin-bottom: 0.4rem;
+  color: var(--gold);
+}
+
+.price {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+footer {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+    
+
+<div class="drip"></div>
+<div class="drip"></div>
+<div class="drip"></div>
+
+
+<div class="container">
+<!-- ROULETTE -->
+<div class="roulette" id="roulette">Proxy Cups!</div>
+
+<button onclick="spin()">LET US DECIDE YOUR CUP</button>
+<button onclick="toggleMenu()">Feeling picky?</button>
+
+<!-- RESULT CARD -->
+<div class="card" id="card">
+  <h2 id="name"></h2>
+  <p id="desc"></p>
+  <div class="price">Starts at ₹40 • Finvestor Carnival ’26</div>
+</div>
+
+<!-- FULL MENU BOX -->
+<div class="menu-box" id="menuBox">
+    
+  <h3>Full Menu 🍫</h3>
+
+<p><b>Choco Lux</b> — Dark chocolate brownie — bold & intense.</p>
+
+<p><b>Galaxy Way</b> — Milk chocolate brownie — smooth & comforting.</p>
+
+<p><b>Midnight Chunk</b> — Milk & dark chocolate — balanced chaos.</p>
+
+<p><b>Pearl Cocoa</b> — White chocolate brownie — soft & sweet.</p>
+
+<p><b>Signature Tros</b> — Triple chocolate — no compromises.</p>
+
+<p><b>Cookie n Cream</b> — Oreo-loaded brownie — crunch therapy.</p>
+
+<p><b>Snowy Kat</b> — KitKat brownie — instant stress relief.</p>
+
+<p><b>Choco Storm Brownie</b> — Chocolate + choco chips — overload mode.</p>
+
+<!-- GLOBAL CHOCOLATE DRIPS -->
+<div class="drip"></div>
+<div class="drip"></div>
+<div class="drip"></div>
+
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menuBox");
+  const card = document.getElementById("card");
+
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+  card.style.display = "none";
+}
+
+const items = [
+  ["Choco Lux", "Dark chocolate brownie. Intense, bold, no distractions."],
+  ["Galaxy Way", "Milk chocolate brownie. Smooth, familiar, comforting."],
+  ["Midnight Chunk", "Milk + dark chocolate. Balanced chaos in every bite."],
+  ["Pearl Cocoa", "White chocolate brownie. Soft, sweet, quietly addictive."],
+  ["Signature Tros", "Triple chocolate overload. No self-control required."],
+  ["Cookie n Cream", "Oreo-loaded brownie. Crunch therapy for bad days."],
+  ["Snowy Kat", "KitKat brownie. Break stress, not fingers."],
+  ["Choco Storm Brownie", "Chocolate with choco chips. Loud, messy, perfect."]
+];
+
+let spinning = false;
+
+function spin() {
+  if (spinning) return;
+  spinning = true;
+
+  const roulette = document.getElementById("roulette");
+  const card = document.getElementById("card");
+
+  card.style.display = "none";
+
+  let i = 0;
+  const stopAt = Math.floor(Math.random() * items.length);
+
+  const interval = setInterval(() => {
+    roulette.innerText = items[i % items.length][0];
+    i++;
+  }, 60);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    roulette.innerText = items[stopAt][0];
+    document.getElementById("name").innerText = items[stopAt][0];
+    document.getElementById("desc").innerText = items[stopAt][1];
+    card.style.display = "block";
+    spinning = false;
+  }, 2000);
+}
+</script>
+
+
+</body>
+</html>
